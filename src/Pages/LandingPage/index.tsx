@@ -7,12 +7,10 @@ import Iphone from '../../assets/iphone_12.png';
 import Tv from '../../assets/tv.png';
 
 import { Container } from './styles';
-import Lines from '../../Components/Lines';
 
 const LandingPage: React.FC = () => {
   return (
     <Container>
-      <Lines />
       <Header />
       <Item title="Computador" img={Computador} />
       <Item title="Notebook" img={Notebook} />

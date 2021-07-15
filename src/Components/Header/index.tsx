@@ -6,8 +6,8 @@ const Header: React.FC = () => {
   return (
     <Container>
       <Logo>IFlow</Logo>
+      <KnowMore> Saiba mais </KnowMore>
     </Container>
-    <KnowMore>Saiba mais</KnowMore>
   );
 };
 
