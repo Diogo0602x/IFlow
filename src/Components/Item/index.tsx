@@ -1,19 +1,26 @@
 import React from 'react';
 
-import { Container, Title, Img } from './styles';
+import { Container, Content, Description, Title, Img, Preco } from './styles';
 
 interface Props {
-  title: string;
+  name: string;
   img: string;
+  preço: string;
 }
 
-const Item: React.FC<Props> = ({ title, img }: Props) => {
+const Item: React.FC<Props> = ({ name, img, preço }: Props) => {
   return (
     <Container>
-      <Title>{title}</Title>
-      <Img>
-        <img src={img} alt="itens" />
-      </Img>
+      <Content>
+        <Img>
+          <img src={img} alt="itens" />
+        </Img>
+
+        <Description>
+          <Title>{name}</Title>
+          <Preco>Preço: {preço}</Preco>
+        </Description>
+      </Content>
     </Container>
   );
 };

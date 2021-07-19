@@ -1,86 +1,51 @@
-import React, { useRef, useCallback, useState } from 'react';
-import { Form } from '@unform/web';
-import { FormHandles } from '@unform/core';
-import * as Yup from 'yup';
-import { FiMail } from 'react-icons/fi';
+import React, { useState } from 'react';
 
 import Header from '../../Components/Header';
 import Item from '../../Components/Item';
-import Input from '../../Components/Input';
 import Computador from '../../assets/pc-gamer.png';
-import Notebook from '../../assets/notebook.png';
 import Iphone from '../../assets/iphone_12.png';
 import Tv from '../../assets/tv.png';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.min.css';
 
-// import getValidationErrors from '../../utils/getValidationErrors';
 
-import { Container } from './styles';
+import { Container, Content, Title, Products, Register, Form, Footer, TextFooter } from './styles';
 
 const LandingPage: React.FC = () => {
-  const formRef = useRef<FormHandles>(null);
+  const [email, setEmail] = useState('');
 
-
-  const handleSubmit = useCallback(
-    async (email: string, event) => {
-      try {
-        formRef.current?.setErrors({});
-
-        const schema = Yup.object().shape({
-          email: Yup.string()
-            .required('E-mail obrigatório')
-            .email('Digite um e-mail válido'),
-        });
-
-        await schema.validate(email, {
-          abortEarly: false,
-        });
-
-        event.preventDefault();
-        localStorage.setItem('@IFlow', email);
-        window.location.reload();
-
-        // addToast({
-        //   type: 'success',
-        //   title: 'Email cadastrado!',
-        //   description: `Seu email foi cadastrado com sucesso`,
-        // });
-      } catch (err) {
-        if (err instanceof Yup.ValidationError) {
-          // const errors = getValidationErrors(err);
-
-          // formRef.current?.setErrors(errors);
-          // addToast({
-          //   type: 'error',
-          //   title: 'Erro na autenticação',
-          //   description:
-          //     'Ocorreu um erro ao fazer login, cheque as credenciais',
-          // });
-
-          return;
-        }
-        // addToast({
-        //   type: 'error',
-        //   title: 'Erro na autenticação',
-        //   description: 'Ocorreu um erro ao fazer login, cheque as credenciais',
-        // });
-      }
-    },
-    [],
-  );
-
+  const addEmailInLocalstorage =(chave: string, valor: string) => {
+    localStorage.setItem(chave, valor);
+    toast.success('Email cadastrado com sucesso')
+  }
+  const ShowEmailInLocalstorage =(chave: string) => {
+    toast.info('Este é o email cadastrado')
+    alert (localStorage.getItem(chave) )
+  }
 
   return (
-    <Container>
+    <Container id="home">
+      <ToastContainer />
       <Header />
-      <Item title="Computador" img={Computador} />
-      <Item title="Notebook" img={Notebook} />
-      <Item title="Iphone" img={Iphone} />
-      <Item title="Tv" img={Tv} />
-      <Form ref={formRef} onSubmit={handleSubmit}>
-      <Input name="email" icon={FiMail} placeholder="E-mail" />
-      <button type="submit">inscrever-se</button>
-      </Form>
-
+      <Content>
+        <Title id="products">Preços imbativeis!</Title>
+        <Products>
+          <Item name="PC Gamer ITX Arena OwNed Powered By Asus, I5 9400F, GTX 1050TI 4GB, 8GB, SSD 240GB" img={Computador} preço="3.999,90 R$"/>
+          <Item name="iPhone 12 Pro Max Apple 128GB - 6,7” Câm. Tripla 12MP iOS" img={Iphone} preço="5.509,07 R$"/>
+          <Item name="Smart TV LED 55 UHD 4K LG 55NANO81 NanoCell, IPS, Bluetooth, HDR, Inteligência Artificial ThinQ AI, Google Assistente, Alexa IOT, Smart Magic - 2020" img={Tv} preço="2.299,00 R$"/>
+        </Products>
+        <Register>
+          <Title id="register">Cadastre-se para receber novas promoções!</Title>
+          <Form>
+            <input placeholder="Email" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+            <button onClick={() => addEmailInLocalstorage('@IFlow:email', email)}>inscrever-se</button>
+            <button onClick={() => ShowEmailInLocalstorage('@IFlow:email')}>consultar</button>
+          </Form>
+        </Register>
+      </Content>
+      <Footer>
+        <TextFooter> © Developed by IFlow - direitos reservados.</TextFooter>
+      </Footer>
     </Container>
   );
 };

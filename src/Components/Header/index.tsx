@@ -1,12 +1,19 @@
 import React from 'react';
 
-import { Container, KnowMore, Logo } from './styles';
+import { Container, Content, Logo, Nav, Home, Products, Resgiter} from './styles';
 
 const Header: React.FC = () => {
   return (
     <Container>
-      <Logo>IFlow</Logo>
-      <KnowMore> Saiba mais </KnowMore>
+      <Content>
+        <Logo>IFlow</Logo>
+
+        <Nav>
+          <Home href="#home">Home</Home>
+          <Products href="#products">Produtos</Products>
+          <Resgiter href="#register">Cadastro</Resgiter>
+        </Nav>
+      </Content>
     </Container>
   );
 };

@@ -14,6 +14,18 @@ export default createGlobalStyle`
     -webkit-font-smoothing: antialiased;
 
   }
+  body::-webkit-scrollbar {
+  background-color: #f5f5f5;
+  width: 8px;
+  }
+  body::-webkit-scrollbar-button {
+    display: none;
+  }
+  body::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  width: 1px;
+  background-color: #fb3052;
+  }
 
   body, input, button, select {
     font-family: 'Roboto', sans-serif;
