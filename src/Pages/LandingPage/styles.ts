@@ -26,7 +26,7 @@ export const Title = styled.div`
   margin: 4% auto 0 auto;
 
   font-size: 42px;
-  color: #fb3052;
+  color: #000000;
   align-items: center;
 `;
 
@@ -48,7 +48,7 @@ export const Register = styled.div`
   align-items: center;
 `;
 
-export const Form = styled.div`
+export const FormComponent = styled.div`
   margin: 5% auto;
   width: 75vw;
   display: flex;
@@ -58,14 +58,14 @@ export const Form = styled.div`
     padding: 1% 4%;
     margin-right: 1%;
 
-    border: solid 1px #fb3052;
+    border: solid 1px #000000;
     border-radius: 8px;
-    color: #fb3052;
+    color: #000000;
     background: transparent;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
     &::placeholder {
-      color: #fb3052;
+      color: #000000;
       font-size: 16px;
     }
   }
@@ -74,14 +74,14 @@ export const Form = styled.div`
       padding: 1% 2%;
 
       border-radius: 8px;
-      background: #fb3052;
+      background: #000000;
       color: #fff;
       border: 0;
       box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 
       &:hover {
       box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
-      color: #3a2d32;
+      color: #00FF00;
       }
     }
       button + button {
@@ -90,7 +90,7 @@ export const Form = styled.div`
 `;
 
 export const Footer = styled.footer`
-  background: #fb3052;
+  background: #000000;
   display: flex;
   justify-content: center;
   align-items: center;

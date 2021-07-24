@@ -10,7 +10,7 @@ export default createGlobalStyle`
 
   body {
     background: #f5f5f5;
-    color: #3f1227;
+    color: #00FF00;
     -webkit-font-smoothing: antialiased;
 
   }
@@ -24,7 +24,7 @@ export default createGlobalStyle`
   body::-webkit-scrollbar-thumb {
   border-radius: 10px;
   width: 1px;
-  background-color: #fb3052;
+  background-color: #000000;
   }
 
   body, input, button, select {
@@ -39,5 +39,4 @@ export default createGlobalStyle`
   button {
     cursor: pointer;
   }
-
 `;

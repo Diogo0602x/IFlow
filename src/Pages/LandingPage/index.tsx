@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback, useState, useRef } from 'react';
 
 import Header from '../../Components/Header';
 import Item from '../../Components/Item';
@@ -7,22 +7,45 @@ import Iphone from '../../assets/iphone_12.png';
 import Tv from '../../assets/tv.png';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.min.css';
+import { FormHandles } from '@unform/core';
+import { Form } from '@unform/web';
 
 
-import { Container, Content, Title, Products, Register, Form, Footer, TextFooter } from './styles';
+import { Container, Content, Title, Products, Register, FormComponent, Footer, TextFooter } from './styles';
+
 
 const LandingPage: React.FC = () => {
   const [email, setEmail] = useState('');
-
-  const addEmailInLocalstorage =(chave: string, valor: string) => {
-    localStorage.setItem(chave, valor);
-    toast.success('Email cadastrado com sucesso')
+  const [name, setName] = useState('');
+  const [cel, setCel] = useState('');
+  const [address, setAddress] = useState('');
+  const formRef = useRef<FormHandles>(null);
+  const value = {email, name, cel, address}
+  const addDataInLocalstorage =(chave: string, value: {}) => {
+    localStorage.setItem(chave, JSON.stringify(value));
+    toast.success('Dados cadastrados com sucesso')
   }
-  const ShowEmailInLocalstorage =(chave: string) => {
-    toast.info('Este é o email cadastrado')
+  const ShowDataInLocalstorage =(chave: string) => {
+    toast.info('Este são seus dados cadastrados')
     alert (localStorage.getItem(chave) )
   }
+ 
+  const handleSubmit = useCallback(
+    async () => {
+      try {
+        formRef.current?.setErrors({});
+        
+        addDataInLocalstorage('@IFlow:data', value);
+        
+        } catch (err) {
 
+       toast.error('Erro ao realizar cadastro');
+      }
+    },
+    [],
+  );
+
+  
   return (
     <Container id="home">
       <ToastContainer />
@@ -36,15 +59,22 @@ const LandingPage: React.FC = () => {
         </Products>
         <Register>
           <Title id="register">Cadastre-se para receber novas promoções!</Title>
-          <Form>
-            <input placeholder="Email" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
-            <button onClick={() => addEmailInLocalstorage('@IFlow:email', email)}>inscrever-se</button>
-            <button onClick={() => ShowEmailInLocalstorage('@IFlow:email')}>consultar</button>
-          </Form>
+
+          <FormComponent>
+           <Form ref={formRef} onSubmit={handleSubmit}>
+              <input placeholder="Email" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+              <input placeholder="Nome completo" type="text" value={name} onChange={(e)=>setName(e.target.value)}/>
+              <input placeholder="Celular" type="text" value={cel} onChange={(e)=>setCel(e.target.value)}/>
+              <input placeholder="Endereço" type="text" value={address} onChange={(e)=>setAddress(e.target.value)}/>
+              <button type="submit">Inscrever-se</button>
+              <button onClick={() => ShowDataInLocalstorage('@IFlow:data')}>Consultar</button>
+            </Form>
+          </FormComponent>
+
         </Register>
       </Content>
       <Footer>
-        <TextFooter> © Developed by IFlow - direitos reservados.</TextFooter>
+        <TextFooter> © Developed by IFlow - Direitos Reservados.</TextFooter>
       </Footer>
     </Container>
   );

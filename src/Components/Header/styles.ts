@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const Container = styled.div`
   height: 7vh;
-  background: #fb3052;
+  background: #000000;
 `;
 
 export const Content = styled.div`
@@ -20,7 +20,7 @@ export const Content = styled.div`
     font-weight: 500;
 
     &:hover {
-      color: #3a2d32
+      color: #00FF00;
     }
   }
 `;
